@@ -1,23 +1,20 @@
-# Next.js + Jest
+# Checkout process
 
-This example shows how to configure Jest to work with Next.js.
+An small checkout model process with NextJS, Typescript, Tailwind and JEST.
 
-This includes Next.js' built-in support for Global CSS, CSS Modules and TypeScript.
+Theres nothing to see right now, but I'll update this README ASAP. :)
 
 ## How to Use
-
-Quickly get started using [Create Next App](https://github.com/vercel/next.js/tree/canary/packages/create-next-app#readme)!
 
 In your terminal, run the following command:
 
 ```bash
-npx create-next-app --example with-jest with-jest-app
-# or
-yarn create next-app --example with-jest with-jest-app
+yarn install
+yarn dev
 ```
 
 ## Run Jest Tests
 
 ```bash
-npm test
+yarn test
 ```
