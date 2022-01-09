@@ -1,8 +1,9 @@
 import { PropsType } from "config/types";
+import styles from "@/styles/components/Button.module.scss";
 
-export default function Button({children, className}: PropsType) {
+export default function Button({children, className, onClick, color, title}: PropsType) {
     return (
-        <button type="button" className={`bg-primary px-8 py-3 rounded-full text-white hover:bg-primary-lighter transition-all ${className}`}>
+        <button type="button" title={title} onClick={onClick} className={`${styles[color || 'default']} ${className}`}>
             {children}
         </button>
     )

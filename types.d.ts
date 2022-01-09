@@ -4,3 +4,8 @@ declare module '*module.css' {
   }
   export default styles
 }
+
+declare module '*.module.scss' {
+  const classes: { [className: string]: string }
+  export default classes
+}

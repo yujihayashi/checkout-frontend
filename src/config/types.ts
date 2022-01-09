@@ -1,3 +1,5 @@
+import { MouseEventHandler } from "react"
+
 export type ProductType = {
     id: number,
     title: string,
@@ -13,5 +15,6 @@ export type ProductType = {
 
 export type PropsType = {
     children?: JSX.Element | string,
+    onClick?: MouseEventHandler<HTMLButtonElement>,
     [key: string]: any
 }
