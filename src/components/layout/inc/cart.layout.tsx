@@ -2,16 +2,56 @@ import Button from "@/components/interface/button";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { PropsType } from "config/types";
+import { useEffect, useRef } from "react";
+import { CSSTransition } from "react-transition-group";
+import styles from "@/styles/layout/Cart.module.scss";
 
-export default function Cart({ handleCart }: PropsType) {
+export default function Cart({ isCartOpen, handleCart }: PropsType) {
+    const cartRef = useRef<HTMLDivElement>(null)
+    useEffect(() => {
+        // close the cart when clicked outside
+        const body = document.querySelector('body');
+        function handleClickOutside(event: any) {
+            if (cartRef.current && !cartRef.current.contains(event.target)) {
+                handleCart(false)
+            }
+        }
+
+        // bind the event listener
+        body?.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            // unbind the event listener on clean up
+            body?.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [cartRef]);
     return (
         <>
-            <div className="fixed w-10/12 bg-primary text-white top-0 bottom-0 right-0 z-50 transition-all md:absolute md:top-full md:mt-1 md:right-0 md:bottom-auto md:rounded px-4 py-2 md:w-[400px]">
-                Cart there
-            </div>
-            <div className="fixed bg-black bg-opacity-70 text-white inset-0 z-40 md:hidden" onClick={handleCart}>
-                <Button color="inherit" className="p-4" title="Close"><FontAwesomeIcon icon={faTimes} /></Button>
-            </div>
+            <CSSTransition
+                in={isCartOpen} timeout={300} classNames={{
+                    enterActive: styles['cart-enter-active'],
+                    enter: styles['cart-enter'],
+                    exitActive: styles['cart-exit-active'],
+                    exit: styles['cart-exit'],
+                    exitDone: styles['cart-exit-done']
+                }}
+                unmountOnExit
+            >
+                <div ref={cartRef} key={1} className={`${styles.cart} ${styles['cart-enter']}`}>
+                    Cart there
+                </div>
+            </CSSTransition>
+            <CSSTransition
+                in={isCartOpen} timeout={300} classNames={{
+                    enterActive: styles['cart-overlay-enter-active'],
+                    enter: styles['cart-overlay-enter'],
+                    exitActive: styles['cart-overlay-exit-active'],
+                    exit: styles['cart-overlay-exit'],
+                    exitDone: styles['cart-overlay-done'],
+                }} unmountOnExit>
+                <div key={2} className={`${styles['cart-overlay']} ${styles['cart-overlay-enter']}`} onClick={() => handleCart(false)}>
+                    <Button color="inherit" className="p-4" title="Close"><FontAwesomeIcon icon={faTimes} /></Button>
+                </div>
+            </CSSTransition>
         </>
     )
 }

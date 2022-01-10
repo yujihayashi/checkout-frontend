@@ -6,7 +6,7 @@ import Header from "./inc/header.layout";
 export default function StoreLayout({ children }: { children: PropsType }) {
     const [isCartOpen, setIsCartOpen] = useState<boolean>(false)
 
-    const handleCart:MouseEventHandler = () => setIsCartOpen(!isCartOpen)
+    const handleCart = (bool: boolean) => setIsCartOpen(bool)
 
     return (
         <>

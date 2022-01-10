@@ -1,0 +1,57 @@
+.cart {
+    @apply fixed w-10/12 bg-primary text-white top-0 bottom-0 right-0 z-50 transition-all md:absolute md:top-full md:mt-1 md:right-0 md:bottom-auto md:rounded px-4 py-2 md:w-[400px];
+}
+
+.cart-enter {
+    transform: translateX(100%);
+    @apply md:translate-x-0 md:opacity-0;
+}
+
+.cart-enter-active {
+    transform: translateX(0);
+    @apply md:opacity-100;
+    transition: opacity 300ms, transform 300ms;
+}
+
+.cart-exit {
+    @apply opacity-100
+}
+
+.cart-exit-active {
+    transform: translateX(100%);
+    @apply md:translate-x-0 md:opacity-0;
+    transition: opacity 300ms, transform 300ms;
+}
+
+.cart-exit-done {
+    transform: translateX(100%);
+    @apply md:translate-x-0 md:opacity-0;
+}
+
+.cart-overlay {
+    @apply fixed bg-black bg-opacity-70 text-white inset-0 z-40 md:hidden transition-all;
+}
+
+.cart-overlay-enter {
+    @apply opacity-0;
+}
+
+.cart-overlay-enter-active {
+    @apply opacity-100;
+    transition: opacity 300ms, transform 300ms;
+}
+
+.cart-overlay-exit {
+    opacity: 1;
+    @apply opacity-100
+}
+
+.cart-overlay-exit-active {
+    @apply opacity-0;
+    transition: opacity 300ms, transform 300ms;
+}
+
+.cart-overlay-exit-done {
+    @apply opacity-0;
+    transition: opacity 300ms, transform 300ms;
+}
