@@ -6,8 +6,12 @@ import { useEffect, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import styles from "@/styles/layout/Cart.module.scss";
 
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store.config";
+
 export default function Cart({ isCartOpen, handleCart }: PropsType) {
     const cartRef = useRef<HTMLDivElement>(null)
+    const { products } = useSelector((state: RootState) => state.cart);
     useEffect(() => {
         // close the cart when clicked outside
         const body = document.querySelector('body');
@@ -37,7 +41,7 @@ export default function Cart({ isCartOpen, handleCart }: PropsType) {
                 unmountOnExit
             >
                 <div ref={cartRef} key={1} className={`${styles.cart} ${styles['cart-enter']}`}>
-                    Cart there
+                    {products.map(p => (<div key={p.id}>{p.title}</div>))}
                 </div>
             </CSSTransition>
             <CSSTransition

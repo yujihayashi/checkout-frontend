@@ -7,10 +7,11 @@ export type ProductType = {
     description: string,
     category: string,
     image: string,
-    rating: {
+    rating?: {
         rate: number,
         count: number
-    }
+    },
+    qty?: number
 }
 
 export type PropsType = {

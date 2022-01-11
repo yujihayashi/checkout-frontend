@@ -1,6 +1,9 @@
 import '@/styles/global.css'
 import type { AppProps } from 'next/app'
+import { storeWrapper } from '@/store/store.config'
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />
 }
+
+export default storeWrapper.withRedux(MyApp);
