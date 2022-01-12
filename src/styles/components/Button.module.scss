@@ -1,9 +1,30 @@
-.primary {
-    @apply bg-primary px-8 py-3 rounded-full text-white inline-flex items-center gap-1 hover:bg-primary-lighter transition-all;
-}
+.primary,
+.primary-inverse,
+.secondary,
 .default {
-    @apply bg-gray-500 px-8 py-3 rounded-full text-white inline-flex items-center gap-1 hover:bg-primary-lighter transition-all;
+    @apply px-8 py-3 rounded-full text-white inline-flex justify-center items-center gap-1 transition-all
 }
+
+.primary {
+    @apply bg-primary hover:bg-primary-lighter;
+}
+
+.primary-inverse {
+    @apply bg-white text-primary hover:bg-primary-lighter hover:text-white;
+}
+
+.secondary {
+    @apply bg-secondary hover:bg-secondary-lighter;
+}
+
+.default {
+    @apply bg-gray-500;
+}
+
 .inherit {
     @apply transition-all;
+}
+
+.sm {
+    @apply px-4 py-2 text-sm;
 }

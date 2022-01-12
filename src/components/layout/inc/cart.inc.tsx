@@ -1,13 +1,15 @@
 import Button from "@/components/interface/button";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faCaretUp, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { PropsType } from "config/types";
 import { useEffect, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import styles from "@/styles/layout/Cart.module.scss";
+import buttonStyles from "@/styles/components/Button.module.scss";
 
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store.config";
+import Link from "next/link";
 
 export default function Cart({ isCartOpen, handleCart }: PropsType) {
     const cartRef = useRef<HTMLDivElement>(null)
@@ -41,7 +43,24 @@ export default function Cart({ isCartOpen, handleCart }: PropsType) {
                 unmountOnExit
             >
                 <div ref={cartRef} key={1} className={`${styles.cart} ${styles['cart-enter']}`}>
-                    {products.map(p => (<div key={p.id}>{p.title}</div>))}
+                    <div className={styles['arrow']}><FontAwesomeIcon icon={faCaretUp} /></div>
+                    {products.length < 1 && (<p className={styles['empty-message']}>Your cart is empty. Add some products from the store to see them here.</p>)}
+
+                    {products.map(p => (
+                        <div key={p.id} className="flex gap-3 items-center border-b border-gray-200 mb-2 pb-2">
+                            <div className="w-9/12">
+                            {p.qty || 1}x {p.title}
+                            </div>
+                            <div className="w-3/12 flex-shrink-0 text-right">
+                                $ {p.price}
+                            </div>
+                        </div>
+                    ))}
+
+                    <div className="flex flex-col items-end">
+                        <div className="mb-2">Subtotal: $ 102</div>
+                        <Link href="/checkout" ><a className={`${buttonStyles['secondary']} ${buttonStyles['sm']}`}>Go to checkout</a></Link>
+                    </div>
                 </div>
             </CSSTransition>
             <CSSTransition

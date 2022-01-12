@@ -12,7 +12,6 @@ export default function Home({ featured, products }: InferGetServerSidePropsType
       <>
         <Head>
           <title>Store</title>
-          <link rel="icon" href="/favicon.ico" />
         </Head>
 
         <main>
@@ -23,12 +22,19 @@ export default function Home({ featured, products }: InferGetServerSidePropsType
             <FeaturedProducts products={featured} />
           </section>
           <section className="mb-6">
-            <h2 className="mb-3">
-              See more!
-            </h2>
+            <div className="flex justify-between">
+              <div>
+                <h2 className="mb-3">
+                  See more!
+                </h2>
+              </div>
+              <div>
+                Filter
+              </div>
+            </div>
             <div className='flex flex-wrap -mx-2'>
               {products.map((p, i) => (
-                <div className='w-full md:w-3/12 px-2 mb-4 flex' key={i}><Product product={p} /></div>
+                <div className='w-full sm:w-6/12 md:w-4/12 lg:w-3/12 px-2 mb-4 flex' key={i}><Product product={p} /></div>
               ))}
             </div>
           </section>
