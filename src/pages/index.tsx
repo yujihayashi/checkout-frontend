@@ -14,7 +14,7 @@ export default function Home({ featured, products }: InferGetServerSidePropsType
           <title>Store</title>
         </Head>
 
-        <main>
+        <main className="py-10">
           <section className="mb-6">
             <h1 className="mb-3">
               Featured product!

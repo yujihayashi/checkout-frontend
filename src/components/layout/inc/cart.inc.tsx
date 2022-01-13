@@ -10,10 +10,12 @@ import buttonStyles from "@/styles/components/Button.module.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store.config";
 import Link from "next/link";
+import Image from "next/image";
+import Shimmer from "@/components/interface/shimmer";
 
 export default function Cart({ isCartOpen, handleCart }: PropsType) {
     const cartRef = useRef<HTMLDivElement>(null)
-    const { products } = useSelector((state: RootState) => state.cart);
+    const { products, total } = useSelector((state: RootState) => state.cart);
     useEffect(() => {
         // close the cart when clicked outside
         const body = document.querySelector('body');
@@ -44,23 +46,31 @@ export default function Cart({ isCartOpen, handleCart }: PropsType) {
             >
                 <div ref={cartRef} key={1} className={`${styles.cart} ${styles['cart-enter']}`}>
                     <div className={styles['arrow']}><FontAwesomeIcon icon={faCaretUp} /></div>
-                    {products.length < 1 && (<p className={styles['empty-message']}>Your cart is empty. Add some products from the store to see them here.</p>)}
+                    <div className="p-4">
+                        {products.length < 1 && (<p className={styles['empty-message']}>Your cart is empty. Add some products from the store to see them here.</p>)}
 
-                    {products.map(p => (
-                        <div key={p.id} className="flex gap-3 items-center border-b border-gray-200 mb-2 pb-2">
-                            <div className="w-9/12">
-                            {p.qty || 1}x {p.title}
+                        {products.map(p => (
+                            <div key={p.id} className="flex gap-3 items-center py-2 text-sm">
+                                <div className="w-2/12 bg-white py-1.5 px-2 rounded">
+                                    <div className="relative w-full h-[40px]">
+                                        <Image src={p.image} alt={p.title} layout="fill"
+                                            objectFit="contain" loading="lazy" placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${Shimmer(700, 475)}`} />
+                                    </div>
+                                </div>
+                                <div className="w-9/12">
+                                    {p.qty || 1}x {p.title}
+                                </div>
+                                <div className="w-2/12 flex-shrink-0 text-right">
+                                    $ {p.price}
+                                </div>
                             </div>
-                            <div className="w-3/12 flex-shrink-0 text-right">
-                                $ {p.price}
-                            </div>
-                        </div>
-                    ))}
-
-                    <div className="flex flex-col items-end">
-                        <div className="mb-2">Subtotal: $ 102</div>
-                        <Link href="/checkout" ><a className={`${buttonStyles['secondary']} ${buttonStyles['sm']}`}>Go to checkout</a></Link>
+                        ))}
                     </div>
+
+                    {products.length > 0 && (<div className="p-4 bg-gray-300 bg-opacity-50 flex flex-col items-end">
+                        <div className="mb-2">Subtotal: $ {total}</div>
+                        <Link href="/checkout" ><a className={`${buttonStyles['secondary']} ${buttonStyles['sm']}`}>Go to checkout</a></Link>
+                    </div>)}
                 </div>
             </CSSTransition>
             <CSSTransition

@@ -10,13 +10,13 @@ import Link from 'next/link'
 export default function Header({ handleCart, isCartOpen, cart }: { handleCart?: any, isCartOpen?: boolean, cart?: boolean }) {
 
     // get the products from redux
-    const { products } = useSelector((state: RootState) => state.cart);
+    const { counter } = useSelector((state: RootState) => state.cart);
     return (
-        <div className="bg-primary text-white mb-10">
+        <div className="bg-primary text-white">
             <div className="container mx-auto px-6 py-4 flex justify-between items-center">
                 <span><Link href="/">StoreDotCom</Link></span>
                 {cart && <div className="relative">
-                    <Button onClick={(e) => { e.preventDefault(); handleCart(!isCartOpen) }} id="cart-button" color="primary-inverse"><><FontAwesomeIcon icon={faShoppingCart} /> <Tag>{products.length.toString()}</Tag></></Button>
+                    <Button onClick={(e) => { e.preventDefault(); handleCart(!isCartOpen) }} id="cart-button" color="primary-inverse"><><FontAwesomeIcon icon={faShoppingCart} /> <Tag>{counter.toString()}</Tag></></Button>
                     <Cart isCartOpen={isCartOpen} handleCart={handleCart} />
                 </div>}
             </div>

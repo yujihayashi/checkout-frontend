@@ -4,20 +4,24 @@ import { UPDATE_CART, UPDATE_TOTAL_VALUE } from "@/store/actions/actions.config"
 
 type Cart = {
     products: ProductType[],
-    total: number
+    total: number,
+    counter: number
 }
 
 const initialState = {
     products: [],
-    total: 0
+    total: 0,
+    counter: 0
 }
 
 const reducer = function (state: Cart = initialState, action: AnyAction) {
     switch (action.type) {
-        case UPDATE_TOTAL_VALUE:
-            return { ...state, total: action.payload }
         case UPDATE_CART:
-            return { ...state, products: updatingCart(state, action) }
+            const products = updatingCart(state, action);
+            const total = products.reduce((result, cartItem) => result + cartItem.price, 0)
+            const counter = products.length;
+
+            return { ...state, products: products, total: total, counter: counter }
         default:
             return state;
     }
