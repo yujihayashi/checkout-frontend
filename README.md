@@ -1,5 +1,7 @@
 # Checkout process
 
+*** STILL IN PROGRESS ***
+
 An small checkout model process with NextJS, Typescript, Tailwind and JEST.
 
 Theres nothing to see right now, but I'll update this README ASAP. :)
