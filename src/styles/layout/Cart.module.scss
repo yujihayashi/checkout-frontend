@@ -10,6 +10,27 @@
     }
 }
 
+.cart__row {
+    @apply flex gap-3 items-center py-2 text-sm;
+}
+
+.cart__img {
+    @apply w-2/12 bg-white py-1.5 px-2 rounded;
+}
+
+.cart__title {
+    @apply w-9/12;
+}
+
+.cart__price {
+    @apply w-2/12 flex-shrink-0 text-right;
+}
+
+.cart__subtotal {
+    @apply p-4 bg-gray-300 bg-opacity-50 flex flex-col items-end;
+}
+
+/* transitions */
 
 .cart-enter {
     transform: translateX(100%);

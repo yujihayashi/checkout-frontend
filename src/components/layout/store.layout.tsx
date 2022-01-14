@@ -1,7 +1,10 @@
-import { PropsType } from "config/types";
-import { MouseEventHandler, useState } from "react";
+import { useState } from "react";
+
 import Footer from "./inc/footer.inc";
 import Header from "./inc/header.inc";
+import { PropsType } from "config/types";
+
+import globalStyles from "@/styles/layout/Global.module.scss";
 
 export default function StoreLayout({ children }: { children: PropsType }) {
     const [isCartOpen, setIsCartOpen] = useState<boolean>(false)
@@ -11,7 +14,7 @@ export default function StoreLayout({ children }: { children: PropsType }) {
     return (
         <>
             <Header handleCart={handleCart} isCartOpen={isCartOpen} cart />
-            <div className="container mx-auto px-6">
+            <div className={globalStyles.wrapper}>
                 {children}
             </div>
             <Footer />

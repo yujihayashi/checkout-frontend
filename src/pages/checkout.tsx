@@ -1,41 +1,46 @@
+import Head from "next/head";
+import Link from "next/link";
+import Image from "next/image";
+import { useSelector } from "react-redux";
+import { ChangeEvent, useState } from "react";
+
+import { RootState } from "@/store/store.config";
+
+import Field from "@/components/form/field";
 import Shimmer from "@/components/interface/shimmer";
 import CheckoutLayout from "@/components/layout/checkout.layout";
-import { RootState } from "@/store/store.config";
-import Image from "next/image";
-import Link from "next/link";
-import { useSelector } from "react-redux";
+import globalStyles from "@/styles/layout/Global.module.scss";
+import styles from "@/styles/pages/Checkout.module.scss";
 import buttonStyles from "@/styles/components/Button.module.scss";
-import Head from "next/head";
-import Field from "@/components/interface/field";
-import { ChangeEvent, ChangeEventHandler, useState } from "react";
+import cartStyles from "@/styles/layout/Cart.module.scss";
 
 export default function Checkout() {
     const personalData = [
-        { name: "First name", variable: "firstname" },
-        { name: "Last name", variable: "lastname" },
-        { name: "Phone number", variable: "phone" },
-        { name: "E-mail", variable: "email" },
+        { label: "First name", name: "firstname", type: "text" },
+        { label: "Last name", name: "lastname", type: "text" },
+        { label: "Phone number", name: "phone", type: "text" },
+        { label: "E-mail", name: "email", type: "text" },
     ]
 
     const address = [
-        { name: "Postal code", variable: "postalcode" },
-        { name: "State", variable: "state" },
-        { name: "City", variable: "city" },
-        { name: "Address 1", variable: "address1" },
-        { name: "Address 2", variable: "address2" },
+        { label: "Postal code", name: "postalcode", type: "text" },
+        { label: "State", name: "state", type: "text" },
+        { label: "City", name: "city", type: "text" },
+        { label: "Address 1", name: "address1", type: "text" },
+        { label: "Address 2", name: "address2", type: "text" },
     ]
 
     const delivery = [
-        { variable: "delivery_method" },
+        { name: "delivery_method", type: "radio", options: [{ label: "Default carrier", value: "default" }, { label: "Express carrier", value: "express" }] },
     ]
 
     const payment = [
-        { variable: "method" },
-        { name: "Card number", variable: "card_number" },
-        { name: "Name on the card", variable: "card_name" },
-        { name: "Month", variable: "card_month" },
-        { name: "Year", variable: "card_year" },
-        { name: "CCV", variable: "card_cvv" },
+        { name: "payment_method", type: "radio", options: [{ label: "Credit card", value: "credit_card" }, { label: "Paypal", value: "paypal" }] },
+        { label: "Card number", name: "card_number", type: "text" },
+        { label: "Name on the card", name: "card_name", type: "text" },
+        { label: "Month", name: "card_month", type: "text" },
+        { label: "Year", name: "card_year", type: "text" },
+        { label: "CCV", name: "card_cvv", type: "text" },
     ]
 
     const initialState = {
@@ -43,6 +48,18 @@ export default function Checkout() {
         lastname: "",
         phone: "",
         email: "",
+        postalcode: "",
+        state: "",
+        city: "",
+        address1: "",
+        address2: "",
+        delivery_method: "default",
+        payment_method: "credit_card",
+        card_number: "",
+        card_name: "",
+        card_month: "",
+        card_year: "",
+        card_cvv: "",
     }
 
     const [state, setState] = useState<any>(initialState)
@@ -55,7 +72,7 @@ export default function Checkout() {
     }
 
     return (<CheckoutLayout>
-        <div className="container mx-auto py-10 px-6">
+        <div className={globalStyles.wrapper}>
             <Head>
                 <title>Checkout</title>
             </Head>
@@ -64,40 +81,40 @@ export default function Checkout() {
                     <h1>Checkout</h1>
                     <div className="flex gap-8">
                         <div className="w-full md:w-1/2">
-                            <div className="mb-10">
+                            <div className={styles.block}>
                                 <h2>Personal data</h2>
-                                {personalData.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.variable]} /></div>))}
+                                {personalData.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.name]} /></div>))}
                             </div>
-                            <div className="mb-10">
+                            <div className={styles.block}>
                                 <h2>Shipping address</h2>
-                                {address.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.variable]} /></div>))}
+                                {address.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.name]} /></div>))}
                             </div>
                         </div>
                         <div className="w-full md:w-1/2">
-                            <div className="mb-10">
+                            <div className={styles.block}>
                                 <h2>Delivery methods</h2>
-                                {delivery.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.variable]} /></div>))}
+                                {delivery.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.name]} /></div>))}
                             </div>
-                            <div className="mb-10">
+                            <div className={styles.block}>
                                 <h2>Payment methods</h2>
-                                {payment.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.variable]} /></div>))}
+                                {payment.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.name]} /></div>))}
                             </div>
                         </div>
                     </div>
                     <div>
                         <h2>Order summary</h2>
                         {products.map(p => (
-                            <div key={p.id} className="flex gap-3 items-center py-2 text-sm">
-                                <div className="w-2/12 bg-white py-1.5 px-2 rounded">
+                            <div key={p.id} className={cartStyles['cart__row']}>
+                                <div className={cartStyles['cart__img']}>
                                     <div className="relative w-full h-[40px]">
                                         <Image src={p.image} alt={p.title} layout="fill"
                                             objectFit="contain" loading="lazy" placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${Shimmer(700, 475)}`} />
                                     </div>
                                 </div>
-                                <div className="w-9/12">
+                                <div className={cartStyles['cart__title']}>
                                     {p.qty || 1}x {p.title}
                                 </div>
-                                <div className="w-2/12 flex-shrink-0 text-right">
+                                <div className={cartStyles['cart__price']}>
                                     $ {p.price}
                                 </div>
                             </div>

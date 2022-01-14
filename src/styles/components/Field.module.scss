@@ -1,0 +1,16 @@
+.field {
+    @apply border rounded-lg w-full py-2 px-4;
+}
+
+.row {
+    @apply mb-5;
+}
+
+.label,
+.radio__label {
+    @apply block mb-0.5 text-gray-700;
+}
+
+.radio__label {
+    @apply flex gap-1 items-center cursor-pointer mb-2;
+}

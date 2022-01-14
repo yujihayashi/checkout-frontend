@@ -50,24 +50,24 @@ export default function Cart({ isCartOpen, handleCart }: PropsType) {
                         {products.length < 1 && (<p className={styles['empty-message']}>Your cart is empty. Add some products from the store to see them here.</p>)}
 
                         {products.map(p => (
-                            <div key={p.id} className="flex gap-3 items-center py-2 text-sm">
-                                <div className="w-2/12 bg-white py-1.5 px-2 rounded">
+                            <div key={p.id} className={styles['cart__row']}>
+                                <div className={styles['cart__img']}>
                                     <div className="relative w-full h-[40px]">
                                         <Image src={p.image} alt={p.title} layout="fill"
                                             objectFit="contain" loading="lazy" placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${Shimmer(700, 475)}`} />
                                     </div>
                                 </div>
-                                <div className="w-9/12">
+                                <div className={styles['cart__title']}>
                                     {p.qty || 1}x {p.title}
                                 </div>
-                                <div className="w-2/12 flex-shrink-0 text-right">
+                                <div className={styles['cart__price']}>
                                     $ {p.price}
                                 </div>
                             </div>
                         ))}
                     </div>
 
-                    {products.length > 0 && (<div className="p-4 bg-gray-300 bg-opacity-50 flex flex-col items-end">
+                    {products.length > 0 && (<div className={styles['cart__subtotal']}>
                         <div className="mb-2">Subtotal: $ {total}</div>
                         <Link href="/checkout" ><a className={`${buttonStyles['secondary']} ${buttonStyles['sm']}`}>Go to checkout</a></Link>
                     </div>)}
