@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import buttonStyles from "@/styles/components/Button.module.scss";
 import Head from "next/head";
 import Field from "@/components/interface/field";
+import { ChangeEvent, ChangeEventHandler, useState } from "react";
 
 export default function Checkout() {
     const personalData = [
@@ -37,7 +38,21 @@ export default function Checkout() {
         { name: "CCV", variable: "card_cvv" },
     ]
 
+    const initialState = {
+        firstname: "",
+        lastname: "",
+        phone: "",
+        email: "",
+    }
+
+    const [state, setState] = useState<any>(initialState)
+
     const { products, total } = useSelector((state: RootState) => state.cart)
+
+    // change the form values
+    const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
+        setState({ ...state, [ev.target.name]: ev.target.value })
+    }
 
     return (<CheckoutLayout>
         <div className="container mx-auto py-10 px-6">
@@ -51,21 +66,21 @@ export default function Checkout() {
                         <div className="w-full md:w-1/2">
                             <div className="mb-10">
                                 <h2>Personal data</h2>
-                                {personalData.map((f, i) => (<div key={i}><Field {...f} /></div>))}
+                                {personalData.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.variable]} /></div>))}
                             </div>
                             <div className="mb-10">
                                 <h2>Shipping address</h2>
-                                {address.map((f, i) => (<div key={i}><Field {...f} /></div>))}
+                                {address.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.variable]} /></div>))}
                             </div>
                         </div>
                         <div className="w-full md:w-1/2">
                             <div className="mb-10">
                                 <h2>Delivery methods</h2>
-                                {delivery.map((f, i) => (<div key={i}><Field {...f} /></div>))}
+                                {delivery.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.variable]} /></div>))}
                             </div>
                             <div className="mb-10">
                                 <h2>Payment methods</h2>
-                                {payment.map((f, i) => (<div key={i}><Field {...f} /></div>))}
+                                {payment.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.variable]} /></div>))}
                             </div>
                         </div>
                     </div>
