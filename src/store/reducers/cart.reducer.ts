@@ -1,6 +1,6 @@
 import { ProductType } from "@/config/types";
 import { AnyAction } from "redux";
-import { UPDATE_CART, UPDATE_TOTAL_VALUE } from "@/store/actions/actions.config";
+import { UPDATE_CART } from "@/store/actions/actions.config";
 
 type Cart = {
     products: ProductType[],

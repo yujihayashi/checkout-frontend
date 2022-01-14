@@ -43,6 +43,10 @@ export default function Checkout() {
         { label: "CCV", name: "card_cvv", type: "text" },
     ]
 
+    interface Form {
+        [key:string]: string;
+    }
+
     const initialState = {
         firstname: "",
         lastname: "",
@@ -62,7 +66,7 @@ export default function Checkout() {
         card_cvv: "",
     }
 
-    const [state, setState] = useState<any>(initialState)
+    const [state, setState] = useState<Form>(initialState)
 
     const { products, total } = useSelector((state: RootState) => state.cart)
 
