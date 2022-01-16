@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 import Footer from "./inc/footer.inc";
 import Header from "./inc/header.inc";
@@ -15,7 +15,9 @@ export default function StoreLayout({ children }: { children: PropsType }) {
         <>
             <Header handleCart={handleCart} isCartOpen={isCartOpen} cart />
             <div className={globalStyles.wrapper}>
-                {children}
+                {React.Children.map(children, (child, i) => {
+                    return child
+                })}
             </div>
             <Footer />
         </>

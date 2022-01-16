@@ -15,7 +15,7 @@ export type ProductType = {
 }
 
 export type PropsType = {
-    children?: JSX.Element | string,
+    children?: JSX.Element | JSX.Element[] | string,
     onClick?: MouseEventHandler<HTMLButtonElement>,
     [key: string]: any
 }

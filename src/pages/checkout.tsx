@@ -44,7 +44,7 @@ export default function Checkout() {
     ]
 
     interface Form {
-        [key:string]: string;
+        [key: string]: string;
     }
 
     const initialState = {
@@ -76,61 +76,62 @@ export default function Checkout() {
     }
 
     return (<CheckoutLayout>
-        <div className={globalStyles.wrapper}>
-            <Head>
-                <title>Checkout</title>
-            </Head>
-            {products.length > 0 ? (
-                <>
-                    <h1>Checkout</h1>
-                    <div className="flex gap-8">
-                        <div className="w-full md:w-1/2">
-                            <div className={styles.block}>
-                                <h2>Personal data</h2>
-                                {personalData.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.name]} /></div>))}
-                            </div>
-                            <div className={styles.block}>
-                                <h2>Shipping address</h2>
-                                {address.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.name]} /></div>))}
-                            </div>
+        <Head>
+            <title>Checkout</title>
+        </Head>
+        {products.length > 0 ? (
+            <>
+                <h1>Checkout</h1>
+                <div className="flex gap-8">
+                    <div className="w-full md:w-1/2">
+                        <div className={styles.block}>
+                            <h2>Personal data</h2>
+                            {personalData.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.name]} /></div>))}
                         </div>
-                        <div className="w-full md:w-1/2">
-                            <div className={styles.block}>
-                                <h2>Delivery methods</h2>
-                                {delivery.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.name]} /></div>))}
-                            </div>
-                            <div className={styles.block}>
-                                <h2>Payment methods</h2>
-                                {payment.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.name]} /></div>))}
-                            </div>
+                        <div className={styles.block}>
+                            <h2>Shipping address</h2>
+                            {address.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.name]} /></div>))}
                         </div>
                     </div>
-                    <div>
-                        <h2>Order summary</h2>
-                        {products.map(p => (
-                            <div key={p.id} className={cartStyles['cart__row']}>
-                                <div className={cartStyles['cart__img']}>
-                                    <div className="relative w-full h-[40px]">
-                                        <Image src={p.image} alt={p.title} layout="fill"
-                                            objectFit="contain" loading="lazy" placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${Shimmer(700, 475)}`} />
-                                    </div>
-                                </div>
-                                <div className={cartStyles['cart__title']}>
-                                    {p.qty || 1}x {p.title}
-                                </div>
-                                <div className={cartStyles['cart__price']}>
-                                    $ {p.price}
+                    <div className="w-full md:w-1/2">
+                        <div className={styles.block}>
+                            <h2>Delivery methods</h2>
+                            {delivery.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.name]} /></div>))}
+                        </div>
+                        <div className={styles.block}>
+                            <h2>Payment methods</h2>
+                            {payment.map((f, i) => (<div key={i}><Field {...f} handleChange={handleChange} value={state[f.name]} /></div>))}
+                        </div>
+                    </div>
+                </div>
+                <div className="mb-5">
+                    <h2>Order summary</h2>
+                    {products.map(p => (
+                        <div key={p.id} className={cartStyles['cart__row']}>
+                            <div className={cartStyles['cart__img']}>
+                                <div className="relative w-full h-[40px]">
+                                    <Image src={p.image} alt={p.title} layout="fill"
+                                        objectFit="contain" loading="lazy" placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${Shimmer(700, 475)}`} />
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                </>
-            ) : (<div className="py-20 text-center">
-                <p className="mb-3">
-                    Your cart is empty. Add some products from the store to see them here.
-                </p>
-                <Link href="/"><a className={`${buttonStyles['secondary']} ${buttonStyles['sm']}`}>Go to the store</a></Link>
-            </div>)}
-        </div>
+                            <div className={cartStyles['cart__title']}>
+                                {p.qty || 1}x {p.title}
+                            </div>
+                            <div className={cartStyles['cart__price']}>
+                                $ {p.price}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <div className="flex justify-center">
+                    <div><Link href="/checkout/done"><a className={buttonStyles.primary}>Place order</a></Link></div>
+                </div>
+            </>
+        ) : (<div className="py-20 text-center">
+            <p className="mb-3">
+                Your cart is empty. Add some products from the store to see them here.
+            </p>
+            <Link href="/"><a className={`${buttonStyles['secondary']} ${buttonStyles['sm']}`}>Go to the store</a></Link>
+        </div>)}
     </CheckoutLayout>)
 }

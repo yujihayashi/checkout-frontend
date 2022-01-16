@@ -1,17 +1,18 @@
-import Button from "@/components/interface/button";
-import { faCaretUp, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { PropsType } from "config/types";
-import { useEffect, useRef } from "react";
-import { CSSTransition } from "react-transition-group";
-import styles from "@/styles/layout/Cart.module.scss";
-import buttonStyles from "@/styles/components/Button.module.scss";
-
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store.config";
 import Link from "next/link";
 import Image from "next/image";
+import { PropsType } from "config/types";
+import { useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
+import { CSSTransition } from "react-transition-group";
+import { faCaretUp, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import Button from "@/components/interface/button";
 import Shimmer from "@/components/interface/shimmer";
+import buttonStyles from "@/styles/components/Button.module.scss";
+
+import { RootState } from "@/store/store.config";
+import styles from "@/styles/layout/Cart.module.scss";
 
 export default function Cart({ isCartOpen, handleCart }: PropsType) {
     const cartRef = useRef<HTMLDivElement>(null)
