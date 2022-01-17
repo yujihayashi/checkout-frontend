@@ -19,11 +19,15 @@
 }
 
 .cart__title {
-    @apply w-9/12;
+    @apply w-8/12;
 }
 
 .cart__price {
     @apply w-2/12 flex-shrink-0 text-right;
+}
+
+.cart__actions {
+    @apply w-1/12 flex-shrink-0 text-right;
 }
 
 .cart__subtotal {

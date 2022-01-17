@@ -1,4 +1,4 @@
-import { FieldInterface } from "@/config/interface";
+import { FieldInterface } from "@/config/types";
 import slugify from "@/helpers/slugify.helper";
 import styles from "@/styles/components/Field.module.scss";
 

@@ -1,22 +1,25 @@
 import Link from "next/link";
-import Image from "next/image";
 import { PropsType } from "config/types";
-import { useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import { faCaretUp, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Button from "@/components/interface/button";
-import Shimmer from "@/components/interface/shimmer";
 import buttonStyles from "@/styles/components/Button.module.scss";
 
-import { RootState } from "@/store/store.config";
 import styles from "@/styles/layout/Cart.module.scss";
 
+// redux
+import { useAppDispatch, useAppSelector } from "@/config/hooks";
+import { getProducts, getTotal, removeProduct } from "@/store/cart.store";
+import CartProducts from "@/components/interface/cart-products";
+
 export default function Cart({ isCartOpen, handleCart }: PropsType) {
+    const dispatch = useAppDispatch();
     const cartRef = useRef<HTMLDivElement>(null)
-    const { products, total } = useSelector((state: RootState) => state.cart);
+    const total = useAppSelector(getTotal);
+    const products = useAppSelector(getProducts);
     useEffect(() => {
         // close the cart when clicked outside
         const body = document.querySelector('body');
@@ -33,6 +36,11 @@ export default function Cart({ isCartOpen, handleCart }: PropsType) {
             body?.removeEventListener("mousedown", handleClickOutside);
         };
     }, [cartRef]);
+
+    const removeProductFromCart = (id: number) => {
+        dispatch(removeProduct(id))
+    }
+
     return (
         <>
             <CSSTransition
@@ -50,22 +58,7 @@ export default function Cart({ isCartOpen, handleCart }: PropsType) {
                     <div className="p-4">
                         {products.length < 1 && (<p className={styles['empty-message']}>Your cart is empty. Add some products from the store to see them here.</p>)}
 
-                        {products.map(p => (
-                            <div key={p.id} className={styles['cart__row']}>
-                                <div className={styles['cart__img']}>
-                                    <div className="relative w-full h-[40px]">
-                                        <Image src={p.image} alt={p.title} layout="fill"
-                                            objectFit="contain" loading="lazy" placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${Shimmer(700, 475)}`} />
-                                    </div>
-                                </div>
-                                <div className={styles['cart__title']}>
-                                    {p.qty || 1}x {p.title}
-                                </div>
-                                <div className={styles['cart__price']}>
-                                    $ {p.price}
-                                </div>
-                            </div>
-                        ))}
+                        <CartProducts removeProductFromCart={removeProductFromCart} products={products} />
                     </div>
 
                     {products.length > 0 && (<div className={styles['cart__subtotal']}>

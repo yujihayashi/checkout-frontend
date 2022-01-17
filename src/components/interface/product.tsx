@@ -1,18 +1,18 @@
 import { ProductType } from "config/types";
-import { formatCurrency } from "helpers/format.helper";
 import Image from "next/image";
 import Button from "./button";
 
-import { updateCart } from "@/store/actions/cart.action";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "@/config/hooks";
+import { addProduct } from "@/store/cart.store";
+
 import Shimmer from "./shimmer";
 
 export default function Product({ product, col }: { product: ProductType, col?: boolean }) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleClick = function (product: ProductType) {
     // add the selected product to the cart (redux)
-    dispatch(updateCart(product))
+    dispatch(addProduct(product))
   }
 
   return (
@@ -25,7 +25,7 @@ export default function Product({ product, col }: { product: ProductType, col?: 
       </header>
       <main className={`py-4 flex flex-col items-center md:items-start ${col ? 'md:mr-auto flex-grow-0 md:w-4/12 ' : 'flex-grow'}`}>
         <span className={`${col ? 'text-xl' : ''}`}>{product.title}</span>
-        <span className={`${col ? 'text-4xl' : 'text-2xl'}`}>R$ {formatCurrency(product.price)}</span>
+        <span className={`${col ? 'text-4xl' : 'text-2xl'}`}>$ {product.price.toFixed(2)}</span>
 
       </main>
       <footer className={`${col ? 'w-full md:w-auto md:mr-auto' : ''}`}>

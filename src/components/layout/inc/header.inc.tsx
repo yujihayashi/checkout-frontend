@@ -1,16 +1,17 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
-import Button from '@/components/interface/button'
+import Link from 'next/link'
+import { getCounter } from '@/store/cart.store'
+import { useAppSelector } from '@/config/hooks'
+
 import Cart from './cart.inc'
 import Tag from '@/components/interface/tag'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/store/store.config'
-import Link from 'next/link'
+import Button from '@/components/interface/button'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
 export default function Header({ handleCart, isCartOpen, cart }: { handleCart?: any, isCartOpen?: boolean, cart?: boolean }) {
 
     // get the products from redux
-    const { counter } = useSelector((state: RootState) => state.cart);
+    const counter = useAppSelector(getCounter);
     return (
         <div className="bg-primary text-white">
             <div className="container mx-auto px-6 py-4 flex justify-between items-center">
