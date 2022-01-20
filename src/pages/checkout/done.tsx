@@ -19,7 +19,7 @@ export default function Done() {
                 <h1>Thank you for your purchase!</h1>
                 <p className="mb-6">Your order number is: 00000001</p>
                 <p className="mb-6">
-                    We'll send you an e-mail order confirmation with details and tracking info.
+                    We&apos;ll send you an e-mail order confirmation with details and tracking info.
                 </p>
                 <p>
                     <Link href="/"><a className={buttonStyles.primary}>Go back to home</a></Link>
