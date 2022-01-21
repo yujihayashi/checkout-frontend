@@ -1,5 +1,5 @@
 import Product from "@/components/interface/product"
-import { render, screen } from "@testing-library/react"
+import { render, screen } from "@/config/test-utils"
 
 const productFixture = {
     "id": 1,
@@ -15,8 +15,8 @@ const productFixture = {
 }
 
 describe('Product component', () => {
-    // render(<Product product={productFixture} />)
+    render(<Product product={productFixture} />)
     it('render the product', () => {
-        // screen.getByText(/foldsack/i)
+        screen.getByText(/foldsack/i)
     })
 })
