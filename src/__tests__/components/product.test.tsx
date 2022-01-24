@@ -1,5 +1,14 @@
 import Product from "@/components/interface/product"
-import { render, screen } from "@/config/test-utils"
+// import { render, screen } from "@/config/test-utils"
+import {
+    render,
+    RenderResult,
+    screen,
+} from '@testing-library/react';
+
+import { Provider } from 'react-redux';
+import store from '@/config/store'
+import { ProductType } from "@/config/types";
 
 const productFixture = {
     "id": 1,
@@ -14,8 +23,16 @@ const productFixture = {
     }
 }
 
+const renderProduct = (product: ProductType): RenderResult =>
+    render(
+        <Provider store={store}>
+            <Product product={product} />
+        </Provider>
+    )
+
+
 describe('Product component', () => {
-    render(<Product product={productFixture} />)
+    renderProduct(productFixture)
     it('render the product', () => {
         screen.getByText(/foldsack/i)
     })
