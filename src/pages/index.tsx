@@ -5,8 +5,34 @@ import axios from 'axios'
 import { ProductType } from 'config/types';
 import { InferGetServerSidePropsType } from 'next';
 import Head from 'next/head'
+import { ChangeEvent, useEffect, useState } from 'react';
+import Field from '@/components/form/field';
 
 export default function Home({ featured, products }: InferGetServerSidePropsType<typeof getStaticProps>) {
+  const [sort, setSort] = useState<string>('featured');
+  const [orderedProducts, setOrderedProducts] = useState<ProductType[]>([])
+
+  // TODO -> Refactor this code cuz the products prop is mutating :(
+  useEffect(() => {
+    setOrderedProducts(products.sort((a, b) => a.id - b.id));
+  }, [])
+
+  const handleSort = function (ev: ChangeEvent<HTMLSelectElement>) {
+    setSort(ev.target.value)
+    switch (ev.target.value) {
+      case 'low-price':
+        setOrderedProducts(products.sort((a, b) => a.price - b.price))
+        break;
+      case 'high-price':
+        setOrderedProducts(products.sort((a, b) => a.price - b.price).reverse())
+        break;
+      case 'featured':
+      default:
+        setOrderedProducts(products.sort((a, b) => a.id - b.id));
+        break;
+    }
+  }
+
   return (
     <StoreLayout>
       <>
@@ -28,12 +54,12 @@ export default function Home({ featured, products }: InferGetServerSidePropsType
                   See more!
                 </h2>
               </div>
-              <div>
-                Filter
+              <div className="text-right">
+                <Field label="Sort by" name="sort" value={sort} type="select" options={[{ label: 'Featured', value: 'featured' }, { label: 'Price: Low to hight', value: 'low-price' }, { label: 'Price: High to low', value: 'high-price' }]} handleChange={handleSort} />
               </div>
             </div>
             <div className='flex flex-wrap -mx-2'>
-              {products.map((p, i) => (
+              {orderedProducts.map((p, i) => (
                 <div className='w-full sm:w-6/12 md:w-4/12 lg:w-3/12 px-2 mb-4 flex' key={i}><Product product={p} /></div>
               ))}
             </div>

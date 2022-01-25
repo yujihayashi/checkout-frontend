@@ -11,6 +11,13 @@ export default function Field({ label, name, value, type = "text", handleChange,
         case "radio":
             input = <Radio type={type} name={name} value={value} handleChange={handleChange} options={options} />
             break;
+        case "select":
+            input = (<select name={name} value={value} onChange={handleChange} className={styles.field}>
+                {options?.map((o, i) => (
+                    <option value={o.value} key={i}>{o.label}</option>
+                ))}
+            </select>)
+            break;
         default:
             input = <input type={type} id={name} name={name} value={value} onChange={handleChange} className={styles.field} />
             break;

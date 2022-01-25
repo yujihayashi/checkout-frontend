@@ -5,7 +5,7 @@ export interface FieldInterface extends RadioInterface {
     name: string,
     value: string,
     type: string,
-    handleChange: ChangeEventHandler<HTMLInputElement>,
+    handleChange: ChangeEventHandler<HTMLInputElement | HTMLSelectElement>,
 }
 
 export interface FieldOptionsInterface {

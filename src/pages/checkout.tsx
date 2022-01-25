@@ -19,7 +19,7 @@ export default function Checkout() {
     const products = useAppSelector(getProducts)
 
     // change the form values
-    const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (ev: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setState({ ...state, [ev.target.name]: ev.target.value })
     }
 
