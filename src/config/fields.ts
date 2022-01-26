@@ -7,8 +7,8 @@ export const personalData = [
 
 export const address = [
     { label: "Postal code", name: "postalcode", type: "text" },
-    { label: "State", name: "state", type: "text" },
-    { label: "City", name: "city", type: "text" },
+    { label: "State", name: "state", type: "text", config: { width: 'w-1/2'} },
+    { label: "City", name: "city", type: "text", config: { width: 'w-1/2'} },
     { label: "Address 1", name: "address1", type: "text" },
     { label: "Address 2", name: "address2", type: "text" },
 ]
@@ -44,6 +44,15 @@ export interface CheckoutFormInterface {
     card_year: string,
     card_cvv: string,
     [key:string]: string,
+}
+
+export interface CheckoutDeliveryFormInterface {
+    postalcode: string,
+    state: string,
+    city: string,
+    address1: string,
+    address2: string,
+    delivery_method: string,
 }
 
 export const checkoutFormInitialState = {
