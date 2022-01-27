@@ -7,7 +7,8 @@ export interface FieldInterface {
     type: string,
     handleChange?: ChangeEventHandler<HTMLInputElement | HTMLSelectElement>,
     options?: FieldOptionsInterface[],
-    config?: FieldConfigInterface
+    config?: FieldConfigInterface,
+    className?: string
 }
 
 export interface FieldOptionsInterface {

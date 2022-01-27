@@ -2,7 +2,7 @@ import { FieldInterface } from "@/config/types";
 import styles from "@/styles/components/Field.module.scss";
 import Radio from "./radio";
 
-export default function Field({ label, name, value, type = "text", handleChange, options, config }: FieldInterface) {
+export default function Field({ label, name, value, type = "text", handleChange, options, config, className }: FieldInterface) {
     let input: JSX.Element;
 
     switch (type) {
@@ -24,7 +24,7 @@ export default function Field({ label, name, value, type = "text", handleChange,
     }
 
     return (
-        <div className={`${styles.row} ${config?.width ? config.width : ''}`}>
+        <div className={`${styles.row} ${config?.width ? config.width : 'w-full'} ${className ? className : ''}`}>
             <label htmlFor={name} className={styles.label}>{label}</label>
             {input}
         </div>

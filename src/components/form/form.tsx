@@ -5,7 +5,7 @@ import Button from "../interface/button";
 import { checkoutFormInitialState, CheckoutFormInterface } from "@/config/fields";
 
 interface FormInterface {
-    handleSubmit: () => void,
+    handleSubmit: (ev: { [key: string]: any }) => void,
     fields: FieldInterface[]
 }
 
@@ -24,7 +24,7 @@ const proxyFields = function (arr: FieldInterface[]) {
 export default function Form({ handleSubmit, fields = [] }: FormInterface) {
     const formData = proxyFields(fields);
 
-    const thisForm = useRef();
+    const thisForm = useRef<HTMLFormElement>(null);
 
     // set the fields in the state
     const [state, setState] = useState<{ [key: string]: any }>(formData)
@@ -41,8 +41,12 @@ export default function Form({ handleSubmit, fields = [] }: FormInterface) {
 
     return (
         <form onSubmit={onSubmit} ref={thisForm}>
-            {fields.map((f, i) => <Field {...f} handleChange={handleChange} value={state[f.name]} key={i} />)}
-            <Button type="submit">Next</Button>
+            <div className="flex flex-wrap -mx-2">
+                {fields.map((f, i) => <Field {...f} handleChange={handleChange} value={state[f.name]} key={i} className="px-2" />)}
+            </div>
+            <div className="flex justify-center">
+                <Button type="submit" color="primary">Next</Button>
+            </div>
         </form>
     )
 }
