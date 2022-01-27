@@ -1,11 +1,14 @@
 import { MouseEventHandler, ChangeEventHandler } from "react"
 
-export interface FieldInterface extends RadioInterface {
+export interface FieldInterface {
     label?: string,
     name: string,
-    value: string,
+    value?: string,
     type: string,
-    handleChange: ChangeEventHandler<HTMLInputElement | HTMLSelectElement>,
+    handleChange?: ChangeEventHandler<HTMLInputElement | HTMLSelectElement>,
+    options?: FieldOptionsInterface[],
+    config?: FieldConfigInterface,
+    className?: string
 }
 
 export interface FieldOptionsInterface {
@@ -13,8 +16,8 @@ export interface FieldOptionsInterface {
     value: string
 }
 
-export interface RadioInterface {
-    options?: FieldOptionsInterface[]
+export interface FieldConfigInterface {
+    width?: string,
 }
 
 export type ProductType = {

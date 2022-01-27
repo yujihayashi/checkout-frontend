@@ -7,6 +7,12 @@ import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import buttonStyles from "@/styles/components/Button.module.scss"
 
 export default function Done() {
+    const getRandomInt = function() {
+        const min = Math.ceil(100000);
+        const max = Math.floor(999999);
+        
+        return Math.floor(Math.random() * (max - min) + min)
+    }
     return (
         <CheckoutLayout>
             <Head>
@@ -17,7 +23,7 @@ export default function Done() {
                     <FontAwesomeIcon icon={faCheckCircle} />
                 </div>
                 <h1>Thank you for your purchase!</h1>
-                <p className="mb-6">Your order number is: 00000001</p>
+                <p className="mb-6">Your order number is: {getRandomInt()}</p>
                 <p className="mb-6">
                     We&apos;ll send you an e-mail order confirmation with details and tracking info.
                 </p>
