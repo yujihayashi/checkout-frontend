@@ -15,7 +15,7 @@ export default function Home({ featured, products }: InferGetServerSidePropsType
   // TODO -> Refactor this code cuz the products prop is mutating :(
   useEffect(() => {
     setOrderedProducts(products.sort((a, b) => a.id - b.id));
-  }, [])
+  }, [products])
 
   const handleSort = function (ev: ChangeEvent<HTMLSelectElement>) {
     setSort(ev.target.value)

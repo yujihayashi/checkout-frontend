@@ -35,7 +35,7 @@ export default function Cart({ isCartOpen, handleCart }: PropsType) {
             // unbind the event listener on clean up
             body?.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [cartRef]);
+    }, [cartRef, handleCart]);
 
     const removeProductFromCart = (id: number) => {
         dispatch(removeProduct(id))

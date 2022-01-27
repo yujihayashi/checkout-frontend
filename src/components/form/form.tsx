@@ -37,7 +37,7 @@ export default function Form({ handleSubmit, fields = [] }: FormInterface) {
     const onSubmit = useCallback(function (ev: FormEvent): void {
         ev.preventDefault();
         handleSubmit(state)
-    }, [])
+    }, [handleSubmit, state])
 
     return (
         <form onSubmit={onSubmit} ref={thisForm}>

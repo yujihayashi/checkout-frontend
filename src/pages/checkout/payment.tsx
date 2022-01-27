@@ -4,7 +4,7 @@ import styles from "@/styles/pages/Checkout.module.scss";
 import Form from "@/components/form/form";
 import Router from "next/router";
 
-export default function checkoutPayment() {
+export default function CheckoutPayment() {
     const handleSubmit =  (ev: { [key: string]: any }) => {
         console.log('ev', ev);
         Router.push("/checkout/review");

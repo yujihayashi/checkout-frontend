@@ -6,7 +6,7 @@ import CartProducts from "@/components/interface/cart-products";
 import { useAppSelector } from "@/config/hooks";
 import { getProducts } from "@/store/cart.store";
 
-export default function checkoutReview() {
+export default function CheckoutReview() {
     // get the products
     const products = useAppSelector(getProducts)
 
