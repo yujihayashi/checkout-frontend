@@ -5,8 +5,8 @@ import CheckoutLayout from "@/components/layout/checkout.layout";
 import styles from "@/styles/pages/Checkout.module.scss";
 import buttonStyles from "@/styles/components/Button.module.scss";
 import { personalData } from "@/config/fields";
-import { getProducts } from "@/store/cart.store";
 import { useAppSelector } from "@/config/hooks";
+import { getProducts } from "@/store/cart.store";
 import Form from "@/components/form/form";
 import Router from "next/router";
 
