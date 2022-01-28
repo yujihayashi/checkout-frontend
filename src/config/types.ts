@@ -1,14 +1,15 @@
 import { MouseEventHandler, ChangeEventHandler } from "react"
 
 export interface FieldInterface {
-    label?: string,
+    label?: string | JSX.Element,
     name: string,
-    value?: string,
+    value?: string | boolean | number | any[],
     type: string,
     handleChange?: ChangeEventHandler<HTMLInputElement | HTMLSelectElement>,
     options?: FieldOptionsInterface[],
     config?: FieldConfigInterface,
-    className?: string
+    className?: string,
+    error?: string
 }
 
 export interface FieldOptionsInterface {

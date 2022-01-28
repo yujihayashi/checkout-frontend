@@ -5,15 +5,16 @@ interface ButtonInterface {
     children: JSX.Element | string,
     className?: string,
     onClick?: MouseEventHandler,
-    color?: 'default' | 'primary' | 'primary-inverse' | 'secondary' | 'inherit',
+    color?: 'default' | 'primary' | 'primary-inverse' | 'secondary' | 'inherit' | 'link',
+    size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
     title?: string,
     id?: string,
     type?: "button" | "submit" | "reset" | undefined
 }
 
-export default function Button({ children, className, onClick, color, title, id, type = "button" }: ButtonInterface) {
+export default function Button({ children, className, onClick, color, size = 'md', title, id, type = "button" }: ButtonInterface) {
     return (
-        <button type={type} id={id} title={title} onClick={onClick} className={`${styles[color || 'default']} ${className || ""}`}>
+        <button type={type} id={id} title={title} onClick={onClick} className={`${styles.button} ${styles[color || 'default']} ${className || ""} ${styles[size || 'md']}`}>
             {children}
         </button>
     )

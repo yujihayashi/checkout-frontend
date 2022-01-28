@@ -3,10 +3,12 @@ import { FieldInterface } from "@/config/types"
 import Field from "./field";
 import Button from "../interface/button";
 import { checkoutFormInitialState, CheckoutFormInterface } from "@/config/fields";
+import Loading from "../interface/loading";
 
 interface FormInterface {
     handleSubmit: (ev: { [key: string]: any }) => void,
-    fields: FieldInterface[]
+    fields: FieldInterface[],
+    loading: boolean
 }
 
 const proxyFields = function (arr: FieldInterface[]) {
@@ -21,7 +23,7 @@ const proxyFields = function (arr: FieldInterface[]) {
     return obj;
 }
 
-export default function Form({ handleSubmit, fields = [] }: FormInterface) {
+export default function Form({ handleSubmit, fields = [], loading = false }: FormInterface) {
     const formData = proxyFields(fields);
 
     const thisForm = useRef<HTMLFormElement>(null);
@@ -36,6 +38,8 @@ export default function Form({ handleSubmit, fields = [] }: FormInterface) {
 
     const onSubmit = useCallback(function (ev: FormEvent): void {
         ev.preventDefault();
+
+        // simulating the request to any api
         handleSubmit(state)
     }, [handleSubmit, state])
 
@@ -44,8 +48,10 @@ export default function Form({ handleSubmit, fields = [] }: FormInterface) {
             <div className="flex flex-wrap -mx-2">
                 {fields.map((f, i) => <Field {...f} handleChange={handleChange} value={state[f.name]} key={i} className="px-2" />)}
             </div>
-            <div className="flex justify-center">
-                <Button type="submit" color="primary">Next</Button>
+            <div className="flex">
+                <Button type="submit" color="primary" size="lg">
+                    {loading ? <Loading text="Sending" /> : 'Next'}
+                </Button>
             </div>
         </form>
     )

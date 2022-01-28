@@ -1,5 +1,9 @@
 .field {
     @apply border rounded-lg w-full py-2 px-4;
+
+    &__description {
+        @apply text-xs;
+    }
 }
 
 .row {
@@ -8,9 +12,13 @@
 
 .label,
 .radio__label {
-    @apply block mb-0.5 text-gray-700;
+    @apply block mb-0.5 text-gray-700 text-sm;
 }
 
 .radio__label {
     @apply flex gap-1 items-center cursor-pointer mb-2;
+}
+
+.error {
+    @apply text-danger;
 }

@@ -1,8 +1,16 @@
+.button {
+    @apply w-full md:w-auto;
+}
+
 .primary,
 .primary-inverse,
 .secondary,
 .default {
     @apply px-8 py-3 rounded-full text-white inline-flex justify-center items-center gap-1 transition-all
+}
+
+.link {
+    @apply text-primary underline hover:no-underline transition-all;
 }
 
 .primary {
@@ -27,4 +35,12 @@
 
 .sm {
     @apply px-4 py-2 text-sm;
+}
+
+.lg {
+    @apply px-12 py-3 text-lg;
+}
+
+.xl {
+    @apply px-16 py-4 text-2xl;
 }

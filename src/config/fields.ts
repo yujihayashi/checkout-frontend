@@ -3,6 +3,7 @@ export const personalData = [
     { label: "Last name", name: "lastname", type: "text", config: { width: 'w-1/2'} },
     { label: "Phone number", name: "phone", type: "text", config: { width: 'w-1/2'} },
     { label: "E-mail", name: "email", type: "text", config: { width: 'w-1/2'} },
+    { label: "Your privacy is important to us. We will only contact you if there is an issue with your order.", name: "email", type: "description" },
 ]
 
 export const address = [
@@ -12,10 +13,6 @@ export const address = [
     { label: "City", name: "city", type: "text", config: { width: 'w-1/2'} },
     { label: "Address 1", name: "address1", type: "text" },
     { label: "Address 2", name: "address2", type: "text" },
-]
-
-export const delivery = [
-    { name: "delivery_method", type: "radio", options: [{ label: "Default carrier", value: "default" }, { label: "Express carrier", value: "express" }] },
 ]
 
 export const payment = [
