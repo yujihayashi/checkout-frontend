@@ -3,7 +3,7 @@ import styles from "@/styles/components/Field.module.scss";
 import Checkbox from "./checkbox";
 import Radio from "./radio";
 
-export default function Field({ label, name, value, type = "text", handleChange, options, config, className }: FieldInterface) {
+export default function Field({ label, name, value, type = "text", handleChange, options, config, className, error = "" }: FieldInterface) {
     let input: JSX.Element;
 
     switch (type) {
@@ -35,6 +35,7 @@ export default function Field({ label, name, value, type = "text", handleChange,
             {/* show the label only if the type equals checkbox */}
             {type !== 'checkbox' ? <label htmlFor={name} className={styles.label}>{label}</label> : ''}
             {input}
+            {error && (<div className={styles.error}>{error}</div>)}
         </div>
     )
 }

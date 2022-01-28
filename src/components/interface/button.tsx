@@ -5,7 +5,7 @@ interface ButtonInterface {
     children: JSX.Element | string,
     className?: string,
     onClick?: MouseEventHandler,
-    color?: 'default' | 'primary' | 'primary-inverse' | 'secondary' | 'inherit',
+    color?: 'default' | 'primary' | 'primary-inverse' | 'secondary' | 'inherit' | 'link',
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
     title?: string,
     id?: string,

@@ -13,8 +13,8 @@ export default function Steps({ step = 1 }: StepsInterface) {
 
     return (
         <div className={styles.steps}>
-            {steps.map(s => (
-                <div className={`${styles.step} ${s === step ? styles.active : ''} ${s < step ? styles.done : ''}`}><i>{s >= step ? s : <FontAwesomeIcon icon={faCheck} />}</i></div>
+            {steps.map((s, i) => (
+                <div className={`${styles.step} ${s === step ? styles.active : ''} ${s < step ? styles.done : ''}`} key={i}><i>{s >= step ? s : <FontAwesomeIcon icon={faCheck} />}</i></div>
             ))}
         </div>
     )
