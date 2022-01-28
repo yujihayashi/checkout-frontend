@@ -1,14 +1,17 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import type { AppState } from '@/config/store'
 import { ProductType } from '@/config/types'
+import { getCookie, setCookie } from '@/helpers/cookie.helper';
+
+const CARD = "CARD";
 
 export interface CartState {
     products: ProductType[]
 }
 
 const initialState: CartState = {
-    products: []
+    products: getCookie(CARD) || [] // get cart from cookie
 }
 
 export const cartSlice = createSlice({
@@ -26,9 +29,15 @@ export const cartSlice = createSlice({
 
             // add this product by default
             state.products = [...products, action.payload]
+
+            // set cart to cookie
+            setCookie(CARD, state.products)
+
         },
         removeProduct: (state, action: PayloadAction<number>) => {
             state.products = state.products.filter((p, i) => i !== action.payload);
+            // update the cart to cookie
+            setCookie(CARD, state.products)
         }
     },
 })
