@@ -10,14 +10,19 @@ import { getProducts } from "@/store/cart.store";
 import Form from "@/components/form/form";
 import Router from "next/router";
 import Steps from "@/components/interface/steps";
+import { useState } from "react";
 
 export default function Checkout() {
+    const [loading, setLoading] = useState(false);
     // get the products
     const products = useAppSelector(getProducts)
 
     const handleSubmit = (ev: { [key: string]: any }) => {
         console.log('ev', ev);
-        Router.push("/checkout/address")
+        setLoading(true) // show the loading
+
+        // simulating the request to any api
+        setTimeout(() => { setLoading(false); Router.push("/checkout/address"); }, 1500)
     }
 
     return (<CheckoutLayout>
@@ -32,10 +37,10 @@ export default function Checkout() {
                         <Steps step={1} />
                         <div className={styles.block}>
                             <div className="mb-4">
-                                <h2>Personal data</h2>
+                                <h2 className="text-2xl">Personal data</h2>
                                 <p>First we need informations about you to proceed.</p>
                             </div>
-                            <Form fields={personalData} handleSubmit={handleSubmit} />
+                            <Form fields={personalData} handleSubmit={handleSubmit} loading={loading} />
                         </div>
                     </div>
                 </div>
