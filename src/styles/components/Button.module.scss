@@ -1,3 +1,7 @@
+.button {
+    @apply w-full md:w-auto;
+}
+
 .primary,
 .primary-inverse,
 .secondary,
@@ -27,4 +31,12 @@
 
 .sm {
     @apply px-4 py-2 text-sm;
+}
+
+.lg {
+    @apply px-12 py-3 text-lg;
+}
+
+.xl {
+    @apply px-16 py-4 text-2xl;
 }

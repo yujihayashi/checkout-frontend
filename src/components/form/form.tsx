@@ -44,8 +44,8 @@ export default function Form({ handleSubmit, fields = [] }: FormInterface) {
             <div className="flex flex-wrap -mx-2">
                 {fields.map((f, i) => <Field {...f} handleChange={handleChange} value={state[f.name]} key={i} className="px-2" />)}
             </div>
-            <div className="flex justify-center">
-                <Button type="submit" color="primary">Next</Button>
+            <div className="flex">
+                <Button type="submit" color="primary" size="lg">Next</Button>
             </div>
         </form>
     )

@@ -16,6 +16,9 @@ export default function Field({ label, name, value, type = "text", handleChange,
                 ))}
             </select>)
             break;
+        case "description":
+            input = <></>
+            break;
         case "phone": // TODO -> create input for phone component
         case "postalcode":  // TODO -> create input for brazilian postalcode component
         default:
@@ -24,7 +27,7 @@ export default function Field({ label, name, value, type = "text", handleChange,
     }
 
     return (
-        <div className={`${styles.row} ${config?.width ? config.width : 'w-full'} ${className ? className : ''}`}>
+        <div className={`${styles.row} ${config?.width ? config.width : 'w-full'} ${className ? className : ''} ${styles[`field__${type}`]}`}>
             <label htmlFor={name} className={styles.label}>{label}</label>
             {input}
         </div>
