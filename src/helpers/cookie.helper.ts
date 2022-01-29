@@ -14,5 +14,5 @@ export const getCookie = (key: string): ProductType[] => {
 }
 
 export const setCookie = (key: string, value: string | object) => {
-    jsCookie.set(key, JSON.stringify(value))
+    jsCookie.set(key, JSON.stringify(value), { expires: 2 })
 }

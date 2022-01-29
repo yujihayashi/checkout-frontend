@@ -36,7 +36,7 @@ export type ProductType = {
 }
 
 export interface PropsType {
-    children?: JSX.Element | JSX.Element[] | string,
+    children?: JSX.Element | JSX.Element[] | string | number,
     onClick?: MouseEventHandler<HTMLButtonElement>,
     [key: string]: any
 }
