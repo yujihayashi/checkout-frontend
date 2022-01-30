@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { PropsType } from "config/types";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
-import { faCaretUp, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faCaretUp, faShoppingCart, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Button from "@/components/interface/button";
@@ -12,19 +12,27 @@ import styles from "@/styles/layout/Cart.module.scss";
 
 // redux
 import { useAppDispatch, useAppSelector } from "@/config/hooks";
-import { getProducts, getTotal, removeProduct } from "@/store/cart.store";
+import { getCounter, getProducts, getTotal, removeProduct } from "@/store/cart.store";
 import CartProducts from "@/components/interface/cart-products";
+import Tag from "@/components/interface/tag";
 
-export default function Cart({ isCartOpen, handleCart }: PropsType) {
+export default function Cart() {
+    const [counter, setCounter] = useState(0)
+    const [isCartOpen, setIsCartOpen] = useState<boolean>(false)
+
     const dispatch = useAppDispatch();
+
     const cartRef = useRef<HTMLDivElement>(null)
+    const cartButtonRef = useRef<HTMLButtonElement>(null)
+
     const total = useAppSelector(getTotal);
     const products = useAppSelector(getProducts);
+    const productLength = useAppSelector(getCounter);
     useEffect(() => {
         // close the cart when clicked outside
         const body = document.querySelector('body');
         function handleClickOutside(event: any) {
-            if (cartRef.current && !cartRef.current.contains(event.target)) {
+            if (cartRef.current && !cartRef.current.contains(event.target) && cartButtonRef.current && !cartButtonRef.current.contains(event.target)) {
                 handleCart(false)
             }
         }
@@ -35,14 +43,23 @@ export default function Cart({ isCartOpen, handleCart }: PropsType) {
             // unbind the event listener on clean up
             body?.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [cartRef, handleCart]);
+    }, [cartRef]);
+
+    // to avoid the hydration warning with the js-cookie
+    useEffect(() => {
+        setCounter(productLength)
+    }, [productLength])
 
     const removeProductFromCart = (id: number) => {
         dispatch(removeProduct(id))
     }
 
+    const handleCart = (bool: boolean) => setIsCartOpen(bool)
+
     return (
         <>
+            <Button forwardedRef={cartButtonRef} onClick={(e) => { e.preventDefault(); handleCart(!isCartOpen) }} id="cart-button" color="primary-inverse"><><FontAwesomeIcon icon={faShoppingCart} /> <Tag>{counter}</Tag></></Button>
+
             <CSSTransition
                 in={isCartOpen} timeout={300} classNames={{
                     enterActive: styles['cart-enter-active'],

@@ -1,5 +1,5 @@
 import styles from "@/styles/components/Button.module.scss";
-import { MouseEventHandler } from "react";
+import { ForwardedRef, MouseEventHandler } from "react";
 
 interface ButtonInterface {
     children: JSX.Element | string,
@@ -9,12 +9,13 @@ interface ButtonInterface {
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
     title?: string,
     id?: string,
-    type?: "button" | "submit" | "reset" | undefined
+    type?: "button" | "submit" | "reset" | undefined,
+    forwardedRef?: ForwardedRef<HTMLButtonElement>
 }
 
-export default function Button({ children, className, onClick, color, size = 'md', title, id, type = "button" }: ButtonInterface) {
+export default function Button({ children, className, onClick, color, size = 'md', title, id, type = "button", forwardedRef }: ButtonInterface) {
     return (
-        <button type={type} id={id} title={title} onClick={onClick} className={`${styles.button} ${styles[color || 'default']} ${className || ""} ${styles[size || 'md']}`}>
+        <button ref={forwardedRef} type={type} id={id} title={title} onClick={onClick} className={`${styles.button} ${styles[color || 'default']} ${className || ""} ${styles[size || 'md']}`}>
             {children}
         </button>
     )
