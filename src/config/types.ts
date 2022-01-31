@@ -3,13 +3,13 @@ import { MouseEventHandler, ChangeEventHandler } from "react"
 export interface FieldInterface {
     label?: string | JSX.Element,
     name: string,
-    value?: string | boolean | number | any[],
+    value?: any | any[],
     type: string,
     handleChange?: ChangeEventHandler<HTMLInputElement | HTMLSelectElement>,
     options?: FieldOptionsInterface[],
     config?: FieldConfigInterface,
     className?: string,
-    error?: string
+    error?: string,
 }
 
 export interface FieldOptionsInterface {
@@ -19,6 +19,7 @@ export interface FieldOptionsInterface {
 
 export interface FieldConfigInterface {
     width?: string,
+    info?: string
 }
 
 export type ProductType = {
