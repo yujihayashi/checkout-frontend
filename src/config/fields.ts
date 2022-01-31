@@ -1,16 +1,16 @@
 export const personalData = [
-    { label: "First name", name: "firstname", type: "text", config: { width: 'w-1/2'} },
-    { label: "Last name", name: "lastname", type: "text", config: { width: 'w-1/2'} },
-    { label: "Phone number", name: "phone", type: "text", config: { width: 'w-1/2'} },
-    { label: "E-mail", name: "email", type: "text", config: { width: 'w-1/2'} },
+    { label: "First name", name: "firstname", type: "text", config: { width: 'w-1/2' } },
+    { label: "Last name", name: "lastname", type: "text", config: { width: 'w-1/2' } },
+    { label: "Phone number", name: "phone", type: "phone", config: { width: 'w-1/2', info: "Brazilian format" } },
+    { label: "E-mail", name: "email", type: "email", config: { width: 'w-1/2' } },
     { label: "Your privacy is important to us. We will only contact you if there is an issue with your order.", name: "email", type: "description" },
 ]
 
 export const address = [
     { name: "delivery_method", type: "radio", value: 'default', options: [{ label: "Default carrier", value: "default" }, { label: "Express carrier", value: "express" }] },
     { label: "Postal code", name: "postalcode", type: "text" },
-    { label: "State", name: "state", type: "text", config: { width: 'w-1/2'} },
-    { label: "City", name: "city", type: "text", config: { width: 'w-1/2'} },
+    { label: "State", name: "state", type: "text", config: { width: 'w-1/2' } },
+    { label: "City", name: "city", type: "text", config: { width: 'w-1/2' } },
     { label: "Address 1", name: "address1", type: "text" },
     { label: "Address 2", name: "address2", type: "text" },
 ]
@@ -41,7 +41,7 @@ export interface CheckoutFormInterface {
     card_month: string,
     card_year: string,
     card_cvv: string,
-    [key:string]: string,
+    [key: string]: string,
 }
 
 export interface CheckoutDeliveryFormInterface {
