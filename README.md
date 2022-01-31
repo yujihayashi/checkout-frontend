@@ -6,6 +6,9 @@ An small checkout model process with NextJS, Typescript, Tailwind and JEST.
 
 Theres nothing to see right now, but I'll update this README ASAP. :)
 
+## DEMO
+[checkout-next.vercel.app](checkout-next.vercel.app)
+
 ## Technologies
 
 - [x] [Create Next App](https://nextjs.org/docs/api-reference/create-next-app);
